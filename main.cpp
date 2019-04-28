@@ -17,7 +17,7 @@ const int screen_size = 80;
 class Player {
 
 private:
-	int pos;
+	int pos;dddddd
 	int hp;
 	int mp;
 	char face[20];
