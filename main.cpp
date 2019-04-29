@@ -12,31 +12,54 @@ void draw(char* loc, const char* face)
 	strncpy(loc, face, strlen(face));
 }
 
-const int screen_size = 80;
 
+class Screen {
+private:
+	int size;
+	char* screen;
+public:
+	Screen()
+	{}
+	Screen()
+		:size(80),screen(new char[size+1])
+	{
+	}
+	~Screen()
+	{
+		delete[] screen;
+	}
+	void draw()
+	{
+		memset(&screen, ' ', size);
+		screen[size] = '\0';
+	}
+	int getSize()
+		{
+		return size;
+		}
+};
 class Player {
-
 private:
 	int pos;
 	int hp;
 	int mp;
 	char face[20];
-
 public:
-	Player() {}
+	Player() 
+	{
+	}
 	Player(int pos, int hp, int mp, const char* face)
 		: pos(pos), hp(hp), mp(mp)   //멤버 초기화 리스트 먼저 this는 그후 만들면서 한다. 메모리 공간 만들면서 바로 한다. 배열은 멤버초기화리스트 에서 불가능
 	{
 		strcpy(this->face, face);
 	}
-
 	~Player()
 	{
 	}
 
 	void setPostion(int pos)   // 클래스 개발자가 제한을 할수 있게 만든다.(함수 사용 이유)
 	{
-		if (pos > screen_size) return;
+		if (pos > screen->size) return;
 		this->pos = pos;
 	}
 
@@ -45,9 +68,20 @@ public:
 		return pos;
 	}
 
-	void draw(char* screen)
+	void draw(Screen* screen)
 	{
-		strncpy(&screen[pos], this->face, strlen(this->face));
+		if (pos < 0 || pos >= screen->getSize()) return;
+		strncpy(&screen[pos], face, strlen(face));
+	}
+
+	void moveLeft()
+	{
+		pos = pos - 1;
+	}
+
+	void moveRight()
+	{
+		pos = pos + 1;
 	}
 };
 
@@ -80,7 +114,12 @@ public:
 	}
 	void draw(char* screen)
 	{
-		strncpy(&screen[pos], this->face, strlen(this->face));
+		if (pos < 0 || pos >= screen_size) return;
+		strncpy(&screen[pos], face, strlen(face));
+	}
+	void moveRandom()
+	{
+		pos = pos + rand() % 3 - 1;
 	}
 };
 
@@ -88,21 +127,22 @@ class Bullet {
 private:
 	int pos;
 	char face[20];
+	bool isFiring;
 public:
 	Bullet()
 	{
 	}
-	Bullet(int pos, const char* face)
-		:pos(pos)
+	Bullet(const char* face)
+		:pos(-1),isFiring(false)
 	{
 		strcpy(this->face, face);
 	}
 	~Bullet()
 	{
 	}
-	void setPostion(int pos)
+	void setPostion(int pos,Screen* screen)
 	{
-		if (pos > screen_size) return;
+		if (pos > screen->size) return;
 		this->pos = pos;
 	}
 
@@ -112,58 +152,68 @@ public:
 	}
 	void draw(char* screen)
 	{
-		strncpy(&screen[pos], this->face, strlen(this->face));
+		if (pos == -1) return;
+		if (pos < 0 || pos >= screen_size) return;
+		strncpy(&screen[pos], face, strlen(face));
 	}
-
+	bool isAlive()
+	{
+		isFiring = true;
+	}
+	void moveLeft()
+	{
+		pos = pos - 1;
+	}
+	void moveRight()
+	{
+		pos = pos + 1;
+	}
+	void setDead()
+	{
+		pos = -1;
+	}
 };
 
 int main()
 {
-	
-	char screen[screen_size + 1];
+	Screen screen;
 	Player player(30,10,10,"(^__^)");
 	Enemy enemy(60,10,"(*__*)");
-	Bullet bullet(-1,"+");
+	Bullet bullet("+");
 
+	screen.draw();
 	while (true)
 	{
-		int playerPos = player.getPosition();
-		int enemyPos = enemy.getPosition();
-		int bulletPos = bullet.getPosition();
-		for (int i = 0; i < screen_size; i++) screen[i] = ' ';
-		screen[screen_size] = '\0';
-
 		if (_kbhit())
 		{
 			int c = _getch();
 			switch (c) {
 			case 'a':
-				playerPos = (playerPos - 1) % screen_size;
+				player.moveLeft();
 				break;
 			case 'd':
-				playerPos = (playerPos + 1) % screen_size;
+				player.moveRight();
 				break;
 			case ' ':
-				bulletPos = playerPos;
+				bullet.setPostion(player.getPosition());
 				break;
 			}
 		}
-		player.draw(screen);
-		enemy.draw(screen);
-		if (bulletPos != -1)
-			bullet.draw(screen);
+		player.draw(&screen);
+		enemy.draw(&screen);
+		bullet.draw(&screen);
 
+		enemy.moveRandom();
 		// update
-		enemyPos = (enemyPos + rand() % 3 - 1) % screen_size;
-		if (bulletPos != -1) {
-			if (bulletPos < enemyPos) {
-				bulletPos = (bulletPos + 1) % screen_size;
+		if (bullet.isAlive()) {
+			if (bullet.getPosition < enemy.getPosition) {
+				bullet.moveRight();
 			}
-			else if (bulletPos > enemyPos) {
-				bulletPos = (bulletPos - 1) % screen_size;
+			else if (bullet.getPosition > enemy.getPosition) {
+				bullet.moveLeft();
 			}
 			else {
-				bulletPos = -1;
+				bullet.setDead();
 			}
 		}
 		
