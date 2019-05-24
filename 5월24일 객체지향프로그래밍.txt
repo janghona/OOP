@@ -1,0 +1,18 @@
+virtual 가상함수
+
+virtual 선언 이후 상속부터 가상함수 적용
+
+Player* p=new Player();
+GameObject* go = p;  upcasting사용
+go->update();   Player update()함수가 실행된다(가상함수 적용시)
+
+상속 사용 자체가 virtual 가상함수 사용해서 부모 클래스 함수 변경해서 사용 재정의(오버라이딩)
+
+upcasting사용시 실체가 Player이지만 GameObject 소멸자함수가 호출된다
+ex) delete go;
+
+virtual 소멸자 함수 사용시 Player 소멸자 생성 후 부모 GameObejct소멸자 함수까지 호출
+
+upcasting목적 원하는 객체 호출할때(bullet,enemy,player) 공통된 인터페이스 부모로부터 접근 가능
+
+upcastsing 사용후 downcasting을 사용하여 자식 고유함수 바꿔서 사용
