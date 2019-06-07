@@ -1,0 +1,22 @@
+싱글톤 구현 : 1개만 존재 ex)Screen
+
+방법 : 생성저함수 private으로 이동
+static Screen* instance; //변수
+static Screen& getInstance(); //함수
+
+Screen.cpp
+Screen* Screen::instance = nullptr; //소스파일에 정의 헤더파일에 하면 #pragma once하고 충돌
+
+Screen& Screen::getInstance()
+{
+	if (instance == nullptr)
+	{
+	     instance = new Screen{ 80 };
+	}
+	return *instance;
+}
+
+main.cpp
+screen >>Screen::getInstance() 바꿈
+
+싱글톤 구현은 객체가 전역객체가 되는것 파라미터를 가져올 필요가 없다.
