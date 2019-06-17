@@ -1,0 +1,27 @@
+update 부분  i++
+
+bullet 구현되는부분을 player에 넣었음
+
+class GameObject; // 링크부분에서 어딘가에있다는 표시
+
+getEnemy() 에너미 있는지 확인하는 함수
+
+for구문 반복문은 찾는 용도가 크다 for루프가 끝난 후 조건을 생각한다.
+
+	int index = find(obj);
+	if (index >= 0) return;
+	index = find(nullptr);
+	if (index = -1) return;
+	objects[index] = obj;
+
+int GameObjects::find(GameObject* obj)
+{
+	
+	for (int i = 0; i < capacity; i++)
+	{
+		if (objects[i] == obj) return i;
+	}
+	return -1;
+}
+
+복사생성자 복사연산자 차이 생성자는 새로 만들어서 함 연산자는 원래있는공간 씀
