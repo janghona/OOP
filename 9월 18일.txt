@@ -1,0 +1,6 @@
+union
+자료형을 하나로 묶은것
+
+유니온 안의 변수중 가장 큰 변수 사이즈로 유니온 크기를 만듬 INPUT_RECORD
+
+input 버퍼 repeat 된다.

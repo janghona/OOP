@@ -1,0 +1,8 @@
+c++ 은 순수가상함수가 하나라도 있으면 abstract class가 되는것
+
+c#이나 java는 abstract,interface 기능이 있음 클래스 앞에 선언한다
+
+생성자함수를 호출할수없다 (객체화,instantiate,materialize)
+메모리 전용공간 확보할수 없다
+
+java 정파 c++ 사파 c# 정파와 사파 섞은거

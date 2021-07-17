@@ -1,0 +1,25 @@
+Template(템플릿)
+헤더파일에만 적용이되니 헤더파일에 정의해야한다.
+->템플릿은 선언하고는곳에서 구현하지만 이것이 정의하는것은 아니다. 선언이다.
+
+템플릿을 C#, Java 에선 Generic programming 이라고 한다.
+
+template function, template class 2개 있음
+
+tempalte class
+클래스 생성시 타입 매개변수 T 를 정해주는것.
+//template generalization
+template<typename T>
+class Container{
+vector<T*> items;
+}
+
+Container<GameObject> gameObjects;
+Containter<Component> components;
+
+//template specialization
+template<>
+void print<Position>(Position input)
+{
+cout;
+}

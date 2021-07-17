@@ -1,0 +1,18 @@
+실체화란 메모리할당
+클래스 멤버변수 object시 실체화 (instantiate, materialize)
+
+구조체와 클래스 차이는 Hiding(은닉), encapsulation(보호) (access specifier)
+public은 API라고도 할수있다.
+
+function signature 
+Inheritance(상속)
+virtual 사용시 재정의(override)됨 더이상 관계가 없지 않음
+upcasting 필수사용 후 downcasting 가능 (원상복구 같은 느낌)
+a( ) override; 가독성 향상을 위해 쓴다.
+
+dynamic_cast : 아닐때는 nullptr가 나오고 맞을때만 cast 된다.
+static_cast : cast 할 클래스가 확실할때
+const_cast : const 상수성 잠시 제거
+reinterpret_cast : 사용을 권장하지 않는다
+
+클래스에서 static 변수/함수 시 전역 변수/함수로 바뀜 (대문자)

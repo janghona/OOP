@@ -1,0 +1,11 @@
+extended for statement
+int test[] = {1,2,3,4};
+for(int i = 0; i < 4;i++){
+int value = test[i];
+}
+
+for(int value : test){
+}
+
+index를 사용하지않고 배열자체를 콜론으로 사용(C++) for each문이라고도 함
+C#에서는 in 으로 표현 

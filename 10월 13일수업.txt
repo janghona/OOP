@@ -1,0 +1,20 @@
+expression = 결과값
+
+int tmp = operator+(x,y)
+int tmp2 = tmp + z = operator+(x,y)+z
+
+operator+ 결과값이 새로운 공간에 저장됨
+operator= 기존 첫번째 매개변수 공간에 저장됨
+
+int a = 10
+int b = a; //copy constructor
+int c;
+
+c = b // opertor=
+
+equal 연산자는 생성자 / 모든 연산자는 함수의 일종이다
+
+result = anyfunction(Position(1,0),Position(0,1))
+//temporay object 복사생성자가 생성되있음
+//지역변수니깐 함수끝나면 사라진다.
+//결국엔 result 값만 남는다.

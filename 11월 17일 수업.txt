@@ -1,0 +1,5 @@
+헤더파일에 전방선언
+
+cpp파일에 include 쓴다
+
+상속받는것은 include로 한다 why?

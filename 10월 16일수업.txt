@@ -1,0 +1,13 @@
+동적할당은 힙 공간에 저장(C#,JAVA) Garbage Collector(메모리 관리)
+
+레퍼런스로 하고싶어도 모두 힙공간을 사용해야되서 지역변수를 사용못한다(스택공간)
+
+C,C++은 value타입(primitive타입)
+
+return 생성자함수를 사용 temporay object
+
+//대부분 return값을 레퍼런스로 두지 않음
+return값을 레퍼런스로사용 할 경우 return을 *this 자기자신을 함
+ex) enemy.add(8).remvoe(5)    //chaining 기법
+
+객체지향에서 제일 중요한거는 코딩이 아니라 설계이다.
